@@ -81,7 +81,8 @@ namespace iwContactManager.Migrations
              );
         }
 
-        bool AddUserAndRole(iwContactManager.Models.ApplicationDbContext context) {
+        bool AddUserAndRole(iwContactManager.Models.ApplicationDbContext context)
+        {
             IdentityResult ir;
 
             var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));

@@ -31,6 +31,8 @@ namespace iwContactManager.Models
 
         public System.Data.Entity.DbSet<iwContactManager.Models.Contact> Contacts { get; set; }
         public System.Data.Entity.DbSet<iwContactManager.Models.List> Lists { get; set; }
+        public System.Data.Entity.DbSet<iwContactManager.Models.Validators.AValidator> Validators { get; set; }
+
     }
 
 }

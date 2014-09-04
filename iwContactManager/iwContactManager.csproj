@@ -158,28 +158,36 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListsController.cs" />
+    <Compile Include="Controllers\ValidatorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201406302050249_Initial.cs" />
-    <Compile Include="Migrations\201406302050249_Initial.Designer.cs">
-      <DependentUpon>201406302050249_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201409031638254_Initial.cs" />
+    <Compile Include="Migrations\201409031638254_Initial.Designer.cs">
+      <DependentUpon>201409031638254_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201408281931365_AddListClass.cs" />
-    <Compile Include="Migrations\201408281931365_AddListClass.Designer.cs">
-      <DependentUpon>201408281931365_AddListClass.cs</DependentUpon>
+    <Compile Include="Migrations\201409032040460_Initial1.cs" />
+    <Compile Include="Migrations\201409032040460_Initial1.Designer.cs">
+      <DependentUpon>201409032040460_Initial1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contacts.cs" />
+    <Compile Include="Models\ContextConfiguration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\List.cs" />
+    <Compile Include="Models\Validators\AgeValidator.cs" />
+    <Compile Include="Models\Validators\AOperatorValidator.cs" />
+    <Compile Include="Models\Validators\AValidator.cs" />
+    <Compile Include="Models\Validators\DupeListValidator.cs" />
+    <Compile Include="Models\Validators\ValidatorModelBinder.cs" />
+    <Compile Include="Models\Validators\ValueValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ValidatorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -188,6 +196,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Readme.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\iwContactManager.pubxml" />
@@ -243,6 +252,14 @@
     <Content Include="Views\Lists\Details.cshtml" />
     <Content Include="Views\Lists\Edit.cshtml" />
     <Content Include="Views\Lists\Index.cshtml" />
+    <Content Include="Views\Validators\_AgeValidator.cshtml" />
+    <Content Include="Views\Validators\_DupeListValidator.cshtml" />
+    <Content Include="Views\Validators\Create.cshtml" />
+    <Content Include="Views\Validators\Delete.cshtml" />
+    <Content Include="Views\Validators\Details.cshtml" />
+    <Content Include="Views\Validators\Edit.cshtml" />
+    <Content Include="Views\Validators\Index.cshtml" />
+    <Content Include="Views\Validators\CreateValidator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -255,11 +272,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201406302050249_Initial.resx">
-      <DependentUpon>201406302050249_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409031638254_Initial.resx">
+      <DependentUpon>201409031638254_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408281931365_AddListClass.resx">
-      <DependentUpon>201408281931365_AddListClass.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409032040460_Initial1.resx">
+      <DependentUpon>201409032040460_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

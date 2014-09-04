@@ -11,7 +11,7 @@ namespace iwContactManager.Migrations
                 "dbo.Contacts",
                 c => new
                     {
-                        ContactId = c.Int(nullable: false, identity: true),
+                        ContactID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Address = c.String(),
                         City = c.String(),
@@ -19,8 +19,34 @@ namespace iwContactManager.Migrations
                         Zip = c.String(),
                         Email = c.String(),
                     })
-                .PrimaryKey(t => t.ContactId);
-
+                .PrimaryKey(t => t.ContactID);
+            
+            CreateTable(
+                "dbo.Lists",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ListName = c.String(),
+                        ListDescription = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.AValidators",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ListID = c.Int(nullable: false),
+                        Description = c.String(),
+                        ValueToValidate = c.String(),
+                        Operator = c.Int(),
+                        ValueToCompareTo = c.String(),
+                        Discriminator = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Lists", t => t.ListID, cascadeDelete: true)
+                .Index(t => t.ListID);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -89,25 +115,69 @@ namespace iwContactManager.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.AgeValidator",
+                c => new
+                    {
+                        ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.AValidators", t => t.ID)
+                .Index(t => t.ID);
+            
+            CreateTable(
+                "dbo.ValueValidator",
+                c => new
+                    {
+                        ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.AValidators", t => t.ID)
+                .Index(t => t.ID);
+            
+            CreateTable(
+                "dbo.DupeListValidator",
+                c => new
+                    {
+                        ID = c.Int(nullable: false),
+                        DupeListId = c.String(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.AValidators", t => t.ID)
+                .Index(t => t.ID);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.DupeListValidator", "ID", "dbo.AValidators");
+            DropForeignKey("dbo.ValueValidator", "ID", "dbo.AValidators");
+            DropForeignKey("dbo.AgeValidator", "ID", "dbo.AValidators");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.AValidators", "ListID", "dbo.Lists");
+            DropIndex("dbo.DupeListValidator", new[] { "ID" });
+            DropIndex("dbo.ValueValidator", new[] { "ID" });
+            DropIndex("dbo.AgeValidator", new[] { "ID" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.AValidators", new[] { "ListID" });
+            DropTable("dbo.DupeListValidator");
+            DropTable("dbo.ValueValidator");
+            DropTable("dbo.AgeValidator");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.AValidators");
+            DropTable("dbo.Lists");
             DropTable("dbo.Contacts");
         }
     }

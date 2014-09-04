@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iwContactManager.Models.Validators;
+using iwContactManager.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,10 @@ namespace iwContactManager
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // custom model binders
+            ModelBinders.Binders.Add(typeof(AValidator), new ValidatorModelBinder());
+            //ModelBinders.Binders.Add(typeof(ValidatorViewModel), new ValidatorViewModelBinder());
         }
     }
 }
