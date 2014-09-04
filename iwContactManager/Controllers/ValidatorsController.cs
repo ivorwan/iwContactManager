@@ -38,38 +38,27 @@ namespace iwContactManager.Controllers
         }
 
 
-        public ActionResult Create2()
-        {
-            ViewBag.ListIDList = new SelectList(db.Lists, "ID", "ListName");
-            PopulateValidatorTypeDropDownList();
 
+        public ActionResult SelectValidatorType()
+        {
             return View();
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create2(AValidator aValidator)
-        {
-            PopulateValidatorTypeDropDownList(ViewBag.ValidatorType);
-
-            if (ModelState.IsValid)
-            {
-                db.Validators.Add(aValidator);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ListID = new SelectList(db.Lists, "ID", "ListName", aValidator.ListID);
-            return View(aValidator);
-        }
-
-
         // GET: Validators/Create
-        public ActionResult Create()
+        public ActionResult Create(string validatorType)
         {
-            ViewBag.ListIDList = new SelectList(db.Lists, "ID", "ListName");
-            PopulateValidatorTypeDropDownList();
+
+            if (String.IsNullOrEmpty(validatorType))
+                return RedirectToAction("SelectValidatorType");
+            //ViewBag.ListIDList = new SelectList(db.Lists, "ID", "ListName");
+            //PopulateValidatorTypeDropDownList();
+
             ValidatorViewModel model = new ValidatorViewModel();
+            model.ValidatorType = validatorType;
+            model.aValidator = (AValidator)Activator.CreateInstance("iwContactManager", "iwContactManager.Models.Validators." + validatorType).Unwrap();
+            
+            //model.ListIDSelectList = new SelectList(db.Lists, "ID", "ListName");
+            //model.ValidatorTypeSelectList = GetValidatorTypeSelectList();
             return View(model);
         }
 
@@ -80,12 +69,11 @@ namespace iwContactManager.Controllers
         [ValidateAntiForgeryToken]
         //public ActionResult Create([Bind(Include = "ValidatorId,Description,ValueToValidate")] AValidator aValidator)
         //public ActionResult Create([ModelBinder(typeof(ValidatorModelBinder))] AValidator aValidator)
-        //public ActionResult Create(AValidator aValidator)
         public ActionResult Create(ValidatorViewModel model)
         {
             //AValidator aValidator = new AgeValidator();
 
-            PopulateValidatorTypeDropDownList(model.ValidatorType);
+            //PopulateValidatorTypeDropDownList(model.ValidatorType);
 
             if (ModelState.IsValid)
             {
@@ -93,7 +81,7 @@ namespace iwContactManager.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ListIDList = new SelectList(db.Lists, "ID", "ListName", model.aValidator.ListID);
+
             return View(model);
         }
 
@@ -166,18 +154,6 @@ namespace iwContactManager.Controllers
             
         }
 
-        private void PopulateValidatorTypeDropDownList(object validatorType = null)
-        {
-        
-            List<SelectListItem> types = new List<SelectListItem>();
-            types.Add(new SelectListItem() { Text = "Select One", Value = "" });
-            types.Add(new SelectListItem() { Text = "AgeValidator", Value = "AgeValidator" });
-            types.Add(new SelectListItem() { Text = "DupeListValidator", Value = "DupeListValidator" });
-            types.Add(new SelectListItem() { Text = "FilterValidator", Value = "FilterValidator" });
-
-            ViewBag.ValidatorTypeList = new SelectList(types, "Text", "Value");
-
-        }
 
         protected override void Dispose(bool disposing)
         {
