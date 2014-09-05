@@ -17,6 +17,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ValueToValidate)
         </th>
+        <th>Validator Type</th>
         <th></th>
     </tr>
 
@@ -27,6 +28,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ValueToValidate)
+        </td>
+        <td>
+            @item.GetType().BaseType.Name
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID}) |

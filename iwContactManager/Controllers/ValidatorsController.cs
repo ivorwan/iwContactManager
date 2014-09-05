@@ -19,7 +19,11 @@ namespace iwContactManager.Controllers
         // GET: Validators
         public ActionResult Index()
         {
-            return View(db.Validators.ToList());
+
+            List<AValidator> list = db.Validators.ToList();
+
+
+            return View(list);
         }
 
         // GET: Validators/Details/5
@@ -106,9 +110,10 @@ namespace iwContactManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ValidatorType = aValidator.GetType().Name;
-            ViewBag.ListIDList = new SelectList(db.Lists, "ID", "ListName", aValidator.ListID);
-            return View(aValidator);
+            ValidatorViewModel model = new ValidatorViewModel();
+            model.aValidator = aValidator;
+            model.ValidatorType = aValidator.GetType().BaseType.Name;
+            return View(model);
         }
 
         // POST: Validators/Edit/5
