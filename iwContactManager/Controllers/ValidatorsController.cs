@@ -71,9 +71,6 @@ namespace iwContactManager.Controllers
         //public ActionResult Create([ModelBinder(typeof(ValidatorModelBinder))] AValidator aValidator)
         public ActionResult Create(ValidatorViewModel model)
         {
-            //AValidator aValidator = new AgeValidator();
-
-            //PopulateValidatorTypeDropDownList(model.ValidatorType);
 
             if (ModelState.IsValid)
             {
@@ -84,6 +81,18 @@ namespace iwContactManager.Controllers
 
             return View(model);
         }
+
+
+
+        public ActionResult CreateDynamic()
+        {
+
+            ValidatorViewModel model = new ValidatorViewModel();
+            return View(model);
+        }
+
+
+
 
         // GET: Validators/Edit/5
         public ActionResult Edit(int? id)
@@ -149,8 +158,11 @@ namespace iwContactManager.Controllers
 
         public ActionResult EditValidator(string validatorType)
         {
-         
-            return PartialView(string.Format("_{0}", validatorType));
+
+            AValidator model = (AValidator)Activator.CreateInstance("iwContactManager", "iwContactManager.Models.Validators." + validatorType).Unwrap();
+
+            ViewData.TemplateInfo.HtmlFieldPrefix = "aValidator";
+            return PartialView(string.Format("_{0}Dynamic", validatorType), model);
             
         }
 

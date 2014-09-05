@@ -262,6 +262,8 @@
     <Content Include="Views\Validators\Edit.cshtml" />
     <Content Include="Views\Validators\Index.cshtml" />
     <Content Include="Views\Validators\SelectValidatorType.cshtml" />
+    <Content Include="Views\Validators\_AgeValidatorDynamic.cshtml" />
+    <Content Include="Views\Validators\CreateDynamic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
