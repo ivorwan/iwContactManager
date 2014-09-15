@@ -78,7 +78,7 @@ namespace iwContactManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ListId,ListName,ListDescription")] List list)
+        public ActionResult Edit([Bind(Include = "ID,ListName,ListDescription")] List list)
         {
             if (ModelState.IsValid)
             {

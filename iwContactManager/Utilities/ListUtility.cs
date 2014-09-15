@@ -23,9 +23,9 @@ namespace iwContactManager.Utilities
             types.Add(new SelectListItem() { Text = "Select One", Value = "" });
             types.Add(new SelectListItem() { Text = "AgeValidator", Value = "AgeValidator" });
             types.Add(new SelectListItem() { Text = "DupeListValidator", Value = "DupeListValidator" });
-            types.Add(new SelectListItem() { Text = "FilterValidator", Value = "FilterValidator" });
+            //types.Add(new SelectListItem() { Text = "FilterValidator", Value = "FilterValidator" });
 
-            SelectList list = new SelectList(types, "Text", "value");
+            SelectList list = new SelectList(types, "value", "Text");
 
             return list;
         }

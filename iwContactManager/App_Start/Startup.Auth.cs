@@ -50,10 +50,15 @@ namespace iwContactManager
             //   appId: "",
             //   appSecret: "");
 
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "462867730119-eeenrvq1esq39bm8gaenh59ck2fnbc24.apps.googleusercontent.com",
+            //    ClientSecret = "6RdAvrpOBKwNybm9GyHtxhsm"
+            //});
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "462867730119-eeenrvq1esq39bm8gaenh59ck2fnbc24.apps.googleusercontent.com",
-                ClientSecret = "6RdAvrpOBKwNybm9GyHtxhsm"
+                ClientId = "29626972662-em7541ooqml1fkvj3m0qstvjjfkqj9bt.apps.googleusercontent.com",
+                ClientSecret = "vVlH-vbRE6GMiBG7v9ELBVxa"
             });
         }
     }

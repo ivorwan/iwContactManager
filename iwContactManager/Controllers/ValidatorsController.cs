@@ -38,7 +38,11 @@ namespace iwContactManager.Controllers
             {
                 return HttpNotFound();
             }
-            return View(aValidator);
+            ValidatorViewModel model = new ValidatorViewModel();
+            model.aValidator = aValidator;
+            model.ValidatorType = aValidator.GetType().BaseType.Name;
+            return View(model);
+
         }
 
 

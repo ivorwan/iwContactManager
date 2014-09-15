@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>AValidator</h4>
+    <h4>@Model.ValidatorType</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -33,6 +33,14 @@
         <dd>
             @Html.DisplayFor(model => model.aValidator.ValueToValidate)
         </dd>
+
+        @{
+            string partialViewName = String.Format("_{0}Detail", @Model.ValidatorType);
+        }
+        @Html.Partial(partialViewName, Model.aValidator, new ViewDataDictionary { TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "aValidator" } })
+
+
+
 
     </dl>
 </div>

@@ -269,6 +269,8 @@
     <Content Include="Views\Validators\_AgeValidatorDynamic.cshtml" />
     <Content Include="Views\Validators\CreateDynamic.cshtml" />
     <Content Include="Views\Validators\_DupeListValidatorDynamic.cshtml" />
+    <Content Include="Views\Validators\_AgeValidatorDetail.cshtml" />
+    <Content Include="Views\Validators\_DupeListValidatorDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
