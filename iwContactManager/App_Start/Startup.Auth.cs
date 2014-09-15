@@ -46,9 +46,9 @@ namespace iwContactManager
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "546307512072385",
+               appSecret: "a41fabf35ceb2cf143f66a7a809fe0fc");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
