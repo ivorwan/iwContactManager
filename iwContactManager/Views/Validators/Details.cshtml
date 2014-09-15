@@ -1,5 +1,5 @@
-﻿@model iwContactManager.Models.Validators.AValidator
-
+﻿@*@model iwContactManager.Models.Validators.AValidator*@
+@model iwContactManager.ViewModels.ValidatorViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -11,32 +11,32 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.List.ListName)
+            @Html.DisplayNameFor(model => model.aValidator.List.ListName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.List.ListName)
+            @Html.DisplayFor(model => model.aValidator.List.ListName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.aValidator.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.aValidator.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ValueToValidate)
+            @Html.DisplayNameFor(model => model.aValidator.ValueToValidate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ValueToValidate)
+            @Html.DisplayFor(model => model.aValidator.ValueToValidate)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.aValidator.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

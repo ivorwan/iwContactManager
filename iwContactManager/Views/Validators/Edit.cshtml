@@ -47,7 +47,7 @@
         
         
         @{
-            string partialViewName = String.Format("_{0}", @Model.ValidatorType);
+            string partialViewName = String.Format("_{0}Dynamic", @Model.ValidatorType);
         }
         @Html.Partial(partialViewName, Model.aValidator, new ViewDataDictionary { TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "aValidator" } })
 
