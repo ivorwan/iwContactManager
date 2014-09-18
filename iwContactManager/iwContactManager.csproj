@@ -201,8 +201,12 @@
     <Compile Include="Models\Validators\ValidatorModelBinder.cs" />
     <Compile Include="Models\Validators\ValueValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\EntityFramework\ContactService.cs" />
     <Compile Include="Services\IContactService.cs" />
+    <Compile Include="Services\IListService.cs" />
+    <Compile Include="Services\IValidatorService.cs" />
+    <Compile Include="Services\EntityFramework\ListService.cs" />
+    <Compile Include="Services\EntityFramework\ValidatorService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\ListUtility.cs" />
     <Compile Include="ViewModels\ValidatorViewModel.cs" />

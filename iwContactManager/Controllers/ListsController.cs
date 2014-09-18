@@ -7,17 +7,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using iwContactManager.Models;
+using iwContactManager.Services;
 
 namespace iwContactManager.Controllers
 {
     public class ListsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IListService service;
+        public ListsController(IListService service)
+        {
+            this.service = service;
+
+        }
 
         // GET: Lists
         public ActionResult Index()
         {
-            return View(db.Lists.ToList());
+            return View(service.GetLists());
         }
 
         // GET: Lists/Details/5
@@ -27,7 +33,7 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List list = db.Lists.Find(id);
+            List list = service.GetList((int)id);
             if (list == null)
             {
                 return HttpNotFound();
@@ -50,8 +56,7 @@ namespace iwContactManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Lists.Add(list);
-                db.SaveChanges();
+                service.InsertList(list);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +70,8 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List list = db.Lists.Find(id);
+            List list = service.GetList((int)id);
+
             if (list == null)
             {
                 return HttpNotFound();
@@ -82,8 +88,7 @@ namespace iwContactManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(list).State = EntityState.Modified;
-                db.SaveChanges();
+                service.UpdateList(list);
                 return RedirectToAction("Index");
             }
             return View(list);
@@ -96,7 +101,8 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List list = db.Lists.Find(id);
+            List list = service.GetList((int)id);
+
             if (list == null)
             {
                 return HttpNotFound();
@@ -109,9 +115,9 @@ namespace iwContactManager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            List list = db.Lists.Find(id);
-            db.Lists.Remove(list);
-            db.SaveChanges();
+            List list = service.GetList((int)id);
+
+            service.DeleteList(list);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +125,7 @@ namespace iwContactManager.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }

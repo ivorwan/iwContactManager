@@ -10,7 +10,7 @@ namespace iwContactManager.Services
     {
         IList<Contact> GetContacts();
 
-        Contact GetContact(int contactID);
+        Contact GetContact(int id);
 
         void DeleteContact(Contact contact);
         void UpdateContact(Contact contact);

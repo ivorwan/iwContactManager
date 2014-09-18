@@ -13,7 +13,6 @@ namespace iwContactManager.Controllers
 {
     public class CmController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
         private IContactService service;
         public CmController(IContactService service)
         {
@@ -34,7 +33,8 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = service.GetContact((int)id);
+            //Contact contact = db.Contacts.Find(id);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -59,8 +59,9 @@ namespace iwContactManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Contacts.Add(contact);
-                db.SaveChanges();
+                //db.Contacts.Add(contact);
+                //db.SaveChanges();
+                service.InsertContact(contact);
                 return RedirectToAction("Index");
             }
 
@@ -75,7 +76,8 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            //Contact contact = db.Contacts.Find(id);
+            Contact contact = service.GetContact((int)id);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -93,8 +95,9 @@ namespace iwContactManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contact).State = EntityState.Modified;
-                db.SaveChanges();
+                service.UpdateContact(contact);
+                //db.Entry(contact).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(contact);
@@ -108,7 +111,8 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            //Contact contact = db.Contacts.Find(id);
+            Contact contact = service.GetContact((int)id);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -122,18 +126,20 @@ namespace iwContactManager.Controllers
         [Authorize(Roles = "canEdit")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact contact = db.Contacts.Find(id);
-            db.Contacts.Remove(contact);
-            db.SaveChanges();
+            //Contact contact = db.Contacts.Find(id);
+            //db.Contacts.Remove(contact);
+            //db.SaveChanges();
+            Contact contact = service.GetContact((int)id);
             return RedirectToAction("Index");
         }
 
+        
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            //if (disposing)
+            //{
+            //    db.Dispose();
+            //}
             base.Dispose(disposing);
         }
     }

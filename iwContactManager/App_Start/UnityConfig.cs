@@ -3,6 +3,7 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 using iwContactManager.Services;
 using iwContactManager.Controllers;
+using iwContactManager.Services.EntityFramework;
 
 namespace iwContactManager
 {
@@ -19,6 +20,11 @@ namespace iwContactManager
 
             container.RegisterType<IContactService, ContactService>();
             container.RegisterType<IController, CmController>("Cm");
+
+            container.RegisterType<IListService, ListService>();
+
+            container.RegisterType<IValidatorService, ValidatorService>();
+
             container.RegisterType<AccountController>(new InjectionConstructor());
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

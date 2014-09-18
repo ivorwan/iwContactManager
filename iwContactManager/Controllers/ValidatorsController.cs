@@ -9,20 +9,26 @@ using System.Web.Mvc;
 using iwContactManager.Models;
 using iwContactManager.Models.Validators;
 using iwContactManager.ViewModels;
+using iwContactManager.Services;
 
 namespace iwContactManager.Controllers
 {
     public class ValidatorsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IValidatorService service;
+        public ValidatorsController(IValidatorService service)
+        {
+            this.service = service;
+
+        }
+
+
 
         // GET: Validators
         public ActionResult Index()
         {
 
-            List<AValidator> list = db.Validators.ToList();
-
-
+            IList<AValidator> list = service.GetValidators();
             return View(list);
         }
 
@@ -33,7 +39,8 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AValidator aValidator = db.Validators.Find(id);
+            AValidator aValidator = service.GetValidator((int)id);
+            
             if (aValidator == null)
             {
                 return HttpNotFound();
@@ -82,8 +89,10 @@ namespace iwContactManager.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Validators.Add(model.aValidator);
-                db.SaveChanges();
+                service.InsertValidator(model.aValidator);
+
+                //db.Validators.Add(model.aValidator);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -109,7 +118,7 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AValidator aValidator = db.Validators.Find(id);
+            AValidator aValidator = service.GetValidator((int)id);
             if (aValidator == null)
             {
                 return HttpNotFound();
@@ -130,11 +139,12 @@ namespace iwContactManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aValidator).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(aValidator).State = EntityState.Modified;
+                //db.SaveChanges();
+                service.UpdateValidator(aValidator);
                 return RedirectToAction("Index");
             }
-            ViewBag.ListIDList = new SelectList(db.Lists, "ID", "ListName", aValidator.ListID);
+            //ViewBag.ListIDList = new SelectList(db.Lists, "ID", "ListName", aValidator.ListID);
             return View(aValidator);
         }
 
@@ -145,7 +155,7 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AValidator aValidator = db.Validators.Find(id);
+            AValidator aValidator = service.GetValidator((int)id);
             if (aValidator == null)
             {
                 return HttpNotFound();
@@ -158,9 +168,11 @@ namespace iwContactManager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AValidator aValidator = db.Validators.Find(id);
-            db.Validators.Remove(aValidator);
-            db.SaveChanges();
+            AValidator aValidator = service.GetValidator((int)id);
+            //db.Validators.Remove(aValidator);
+            //db.SaveChanges();
+
+            service.DeleteValidator(aValidator);
             return RedirectToAction("Index");
         }
 
@@ -180,7 +192,7 @@ namespace iwContactManager.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }
