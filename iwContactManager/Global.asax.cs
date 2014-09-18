@@ -19,6 +19,8 @@ namespace iwContactManager
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            UnityConfig.RegisterComponents(); 
+
             // custom model binders
             ModelBinders.Binders.Add(typeof(AValidator), new ValidatorModelBinder());
             //ModelBinders.Binders.Add(typeof(ValidatorViewModel), new ValidatorViewModelBinder());

@@ -7,17 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using iwContactManager.Models;
+using iwContactManager.Services;
 
 namespace iwContactManager.Controllers
 {
     public class CmController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private IContactService service;
+        public CmController(IContactService service)
+        {
+            this.service = service;
 
+        }
         // GET: Cm
         public ActionResult Index()
         {
-            return View(db.Contacts.ToList());
+            return View(service.GetContacts());
+            //return View(db.Contacts.ToList());
         }
 
         // GET: Cm/Details/5
