@@ -1,4 +1,6 @@
-﻿using iwContactManager.Models.Validators;
+﻿using AutoMapper;
+using iwContactManager.Models;
+using iwContactManager.Models.Validators;
 using iwContactManager.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace iwContactManager
 
             // custom model binders
             ModelBinders.Binders.Add(typeof(AValidator), new ValidatorModelBinder());
-            //ModelBinders.Binders.Add(typeof(ValidatorViewModel), new ValidatorViewModelBinder());
+
         }
     }
 }

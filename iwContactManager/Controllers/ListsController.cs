@@ -8,22 +8,36 @@ using System.Web;
 using System.Web.Mvc;
 using iwContactManager.Models;
 using iwContactManager.Services;
+using AutoMapper;
+using iwContactManager.ViewModels;
 
 namespace iwContactManager.Controllers
 {
+    /// <summary>
+    /// Lists uses ListViewModel to separate the business objects from the viewModel (MVVM). 
+    /// It uses AutoMapper to help (only really useful with large/complex objects)
+    /// </summary>
     public class ListsController : Controller
     {
         private IListService service;
         public ListsController(IListService service)
         {
             this.service = service;
+            // AutoMapper
+            Mapper.CreateMap<List, ListViewModel>();
+            Mapper.CreateMap<ListViewModel, List>();
 
         }
 
         // GET: Lists
         public ActionResult Index()
         {
-            return View(service.GetLists());
+            IList<List> model = service.GetLists();
+            
+            //Mapper.CreateMap<List, ListViewModel>();
+            var viewModel = Mapper.Map<IList<ListViewModel>>(model);
+
+            return View(viewModel);
         }
 
         // GET: Lists/Details/5
@@ -33,12 +47,14 @@ namespace iwContactManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List list = service.GetList((int)id);
-            if (list == null)
+            List model = service.GetList((int)id);
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(list);
+
+            ListViewModel viewModel = Mapper.Map<ListViewModel>(model);
+            return View(viewModel);
         }
 
         // GET: Lists/Create
@@ -52,11 +68,12 @@ namespace iwContactManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ListId,ListName,ListDescription")] List list)
+        public ActionResult Create([Bind(Include = "ListId,ListName,ListDescription")] ListViewModel list)
         {
+            var model = Mapper.Map<List>(list);
             if (ModelState.IsValid)
             {
-                service.InsertList(list);
+                service.InsertList(model);
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +93,8 @@ namespace iwContactManager.Controllers
             {
                 return HttpNotFound();
             }
-            return View(list);
+            ListViewModel viewModel = Mapper.Map<ListViewModel>(list);
+            return View(viewModel);
         }
 
         // POST: Lists/Edit/5
@@ -84,11 +102,12 @@ namespace iwContactManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ListName,ListDescription")] List list)
+        public ActionResult Edit([Bind(Include = "ID,ListName,ListDescription")] ListViewModel list)
         {
+            var model = Mapper.Map<List>(list);
             if (ModelState.IsValid)
             {
-                service.UpdateList(list);
+                service.UpdateList(model);
                 return RedirectToAction("Index");
             }
             return View(list);
