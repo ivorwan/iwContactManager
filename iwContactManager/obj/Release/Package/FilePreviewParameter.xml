@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="iwContactManager" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\git\\Source\\Repos\\iwContactManager\\iwContactManager\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\git\\Source\\Repos\\iwContactManager\\iwContactManager\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=tcp:uz2n9h4z1p.database.windows.net,1433;Initial Catalog=contactDB;User Id=contactDBadmin@uz2n9h4z1p;Password=Wbnt1067" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\git\\Source\\Repos\\iwContactManager\\iwContactManager\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

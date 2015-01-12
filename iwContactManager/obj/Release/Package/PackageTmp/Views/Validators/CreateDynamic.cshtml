@@ -1,0 +1,96 @@
+﻿@*@model iwContactManager.Models.Validators.AValidator*@
+@model iwContactManager.ViewModels.ValidatorViewModel
+
+@{
+    ViewBag.Title = "CreateDynamic";
+}
+
+<h2>CreateDynamic</h2>
+
+@using (Html.BeginForm("Create", "Validators", FormMethod.Post, new {@id="form1"}) )
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AValidator</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.aValidator.ListID, "ListID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("ListID", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.aValidator.ListID, iwContactManager.Utilities.ListUtility.GetListIDSelectList(), String.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.aValidator.ListID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.aValidator.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.aValidator.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.aValidator.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.aValidator.ValueToValidate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.aValidator.ValueToValidate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.aValidator.ValueToValidate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValidatorType, "ValidatorType", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model.ValidatorType, iwContactManager.Utilities.ListUtility.GetValidatorTypesSelectList(), String.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ValidatorType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="partial"></div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#ValidatorType").change(function () {
+                var type = $("#ValidatorType").val();
+                $.ajax({
+                    url: '/validators/editValidator?validatorType=' + type,
+                    data: '',
+                    dataType: 'html',
+                    success: function (data) {
+
+                        var currForm = $('#partial').closest("form");
+                        $('#partial').html(data);
+
+                        currForm.removeData("validator");
+                        currForm.removeData("unobtrusiveValidation");
+                        $.validator.unobtrusive.parse(currForm);
+                        currForm.validate();
+
+                        //$("#form1").removeData("validator");
+                        //$("#form1").removeData("unobtrusiveValidation");
+                        //$.validator.unobtrusive.parse("#form1");
+                        //$("#form1").validate();
+                    }
+
+                });
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
