@@ -10,6 +10,7 @@
 
 
     <meta name="description" content="The description of my page" />
+    @RenderSection("header", false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,6 +29,7 @@
                     <li>@Html.ActionLink("Contact Manager", "Index", "Cm")</li>
                     <li>@Html.ActionLink("Lists", "Index", "Lists")</li>
                     <li>@Html.ActionLink("Validators", "Index", "Validators")</li>
+                    <li>@Html.ActionLink("SignarR Chat", "Chat", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>

@@ -27,5 +27,11 @@ namespace iwContactManager.Controllers
 
             return View();
         }
+
+        [AllowAnonymous]
+        public ActionResult Chat()
+        {
+            return View();
+        }
     }
 }
