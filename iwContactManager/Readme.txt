@@ -4,3 +4,5 @@ Add-Migration Initial
 
 #install web essentials
 #http://vswebessentials.com/download
+
+#test commit jan 12 from home 
