@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Winners";
+}
+
+@section header{
+    <style type="text/css">
+        .notice {
+            position: absolute;
+            top: 0px;
+        }
+
+        .fade-animation.ng-hide-add, .fade-animation.ng-hide-remove {
+            transition: 1.5s linear all;
+            display: block !important;
+        }
+
+        .fade-animation.ng-hide-remove {
+            opacity: 0;
+        }
+
+            .fade-animation.ng-hide-remove.ng-hide-remove-active {
+                opacity: .8;
+            }
+
+        .fade-animation.ng-hide-add {
+            opacity: 0;
+        }
+
+            .fade-animation.ng-hide-add.ng-hide-add-active {
+                opacity: 0;
+            }
+
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+}
+
+<h2>Winners</h2>
+
+This example uses AngularJS calling an API to populate a html template set below.
+Some animation was added.
+<div ng-app="iwContactManager">
+
+
+    <strong>RECENT WINNERS</strong>
+    <div ng-controller="WinnersController">
+        <div class="col-sm-12">
+
+            <div ng-cloak>
+                <span class="fade-animation notice" ng-repeat="winner in winners" index={{$index}} binding-winners="winners" ng-show="currentNotice == $index" notice-directive ng-cloak>{{winner.WinDate | date:'MM/dd'}} - {{winner.Name}} from {{winner.City}}, {{winner.State}} just won {{winner.Prize}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.js"></script>
+    <script type="text/javascript" src="/Scripts/App.js"></script>
+
+}

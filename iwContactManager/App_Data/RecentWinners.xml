@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Winner>
+    <Name>Eita Porra</Name>
+    <City>Los Angeles</City>
+    <State>CA</State>
+    <Prize>$50 Cash</Prize>
+    <WinDate>2014-07-02</WinDate>
+  </Winner>
+  <Winner>
+    <Name>Sunda Birunda</Name>
+    <City>New York</City>
+    <State>NY</State>
+    <Prize>$50 Amazon Gift card</Prize>
+    <WinDate>2014-07-12</WinDate>
+  </Winner>
+  <Winner>
+    <Name>Sosbra Birosbra</Name>
+    <City>Chicago</City>
+    <State>IL</State>
+    <Prize>$50 Toys R Us Gift Card</Prize>
+    <WinDate>2014-07-22</WinDate>
+  </Winner>
+</Root>
