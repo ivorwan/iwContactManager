@@ -49,10 +49,11 @@ Some animation was added.
         <div class="col-sm-12">
 
             <div ng-cloak>
-                <span class="fade-animation notice" ng-repeat="winner in winners" index={{$index}} binding-winners="winners" ng-show="currentNotice == $index" notice-directive ng-cloak>{{winner.WinDate | date:'MM/dd'}} - {{winner.Name}} from {{winner.City}}, {{winner.State}} just won {{winner.Prize}}</span>
+                <span class="fade-animation notice" ng-repeat="winner in winners" index={{$index}}  ng-show="currentNotice == $index" notice-directive ng-cloak>{{winner.WinDate | date:'MM/dd'}} - {{winner.Name}} from {{winner.City}}, {{winner.State}} just won {{winner.Prize}}</span>
             </div>
         </div>
     </div>
+
 </div>
 
 
