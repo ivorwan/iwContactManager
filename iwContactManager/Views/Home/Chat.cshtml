@@ -13,23 +13,29 @@
     </style>
 }
 <div ng-controller="ChatController as chatCtrl" ng-app="iwContactManager">
-    <form name="nameForm" ng-submit="nameForm.$valid && submitName()" novalidate>
+    <form name="nameForm" ng-submit="nameForm.$valid && submitName()" ng-hide="nameIsSet" novalidate>
         <input type="text" name="name" ng-model="name" required />
         <input type="submit" value="Submit" />
     </form>
     
-    <span>{{chatCtrl.name}}</span>
     
     <h2>Chat</h2>
-    <div class="form-horizontal">
+
+    
+
+    <div class="form-horizontal" ng-show="nameIsSet" ng-cloak>
+        <div class="form-control">
+            Your screen name: <span ng-cloak>{{name}}</span>
+        </div>
+        
         <div class="container" id="chat">
-            <form name="messageForm" ng-submit="messageForm.$valid && greetAll()" novalidate>
+            <form name="messageForm" ng-submit="messageForm.$valid && sendMessage()" novalidate>
                 <input type="text" id="message" ng-model="message" required />
                 <input type="submit" id="sendmessage" value="Send" />
             </form>
             
             <ul id="discussion" ng-repeat="msg in discussion">
-                <li>{{msg.name}} : {{msg.message}}</li>
+                <li ng-cloak>{{msg.name}} : {{msg.message}}</li>
             </ul>
         </div>
     </div>
