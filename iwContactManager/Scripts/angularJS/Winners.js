@@ -26,7 +26,7 @@
     });
 
     app.controller('WinnersController', ['$http', '$scope', '$interval', '$log', 'winnerService', function ($http, $scope, $interval, $log, winnerService) {
-        //var store = this;
+        
         var timeoutId;
         $scope.winners = [];
         $scope.currentNotice = 0;
@@ -40,6 +40,7 @@
             function (errorPl) {
                 $log.error('failure loading Winners', errorPl);
             });
+        /* alternate solution without creating winners service */
         /*
         $http.get('/Api/Values').success(function (data) {
             $scope.winners = data;

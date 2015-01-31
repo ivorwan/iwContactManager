@@ -2,7 +2,7 @@
     var app = angular.module('chat-module', []);
 
 
-    app.service('signalRSvc', function ($, $rootScope) {
+    app.service('signalRSvc', function ($rootScope) {
         var proxy = null;
 
         var initialize = function () {
@@ -47,6 +47,7 @@
             //console.log('sendMessage - $scope.name: ' + $scope.name + ' this.name: ' + this.name + '- $rootScope.message: ' + $rootScope.message);
             signalRSvc.sendRequest(this.name, this.message);
             this.message = '';
+            $scope.messageForm.$setPristine();
         }
 
         updateDiscussionMessages = function (name, message) {
