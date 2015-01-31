@@ -12,14 +12,16 @@
         }
     </style>
 }
+
+<h2>Chat</h2>
 <div ng-controller="ChatController as chatCtrl" ng-app="iwContactManager">
     <form name="nameForm" ng-submit="nameForm.$valid && submitName()" ng-hide="nameIsSet" novalidate>
-        <input type="text" name="name" ng-model="name" required />
-        <input type="submit" value="Submit" />
+        Enter your screen name:
+        <input type="text" name="name" ng-model="name" required ng-minlength="2" class="form-control" /><br />
+        <input type="submit" value="Submit" class="btn" />
     </form>
     
     
-    <h2>Chat</h2>
 
     
 
@@ -30,8 +32,11 @@
         
         <div class="container" id="chat">
             <form name="messageForm" ng-submit="messageForm.$valid && sendMessage()" novalidate>
-                <input type="text" id="message" ng-model="message" required />
-                <input type="submit" id="sendmessage" value="Send" />
+                <div class="form-group">
+                    <input type="text" id="message" ng-model="message" required class="form-control" />
+                </div>
+                
+                <input type="submit" id="sendmessage" value="Send" class="btn" />
             </form>
             
             <ul id="discussion" ng-repeat="msg in discussion">
@@ -55,7 +60,9 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.js"></script>
-    <script type="text/javascript" src="/Scripts/App.js"></script>
+    <script type="text/javascript" src="/Scripts/angularJS/App.js"></script>
+<script type="text/javascript" src="~/Scripts/angularJS/Winners.js"></script>
+<script type="text/javascript" src="~/Scripts/angularJS/Chat.js"></script>
 
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
