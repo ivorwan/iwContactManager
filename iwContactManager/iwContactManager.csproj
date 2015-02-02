@@ -251,7 +251,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Readme.txt" />
-    <Content Include="Scripts\App.js" />
+    <Content Include="Scripts\angularJS\App.js" />
+    <Content Include="Scripts\angularJS\Chat.js" />
+    <Content Include="Scripts\angularJS\Winners.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\iwContactManager.pubxml" />

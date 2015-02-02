@@ -15,3 +15,18 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* angular css*/
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+
+        .ng-invalid.ng-dirty
+        {
+            border-color: red;
+        }
+
+        .ng-valid.ng-dirty {
+            border-color: green;
+        }
