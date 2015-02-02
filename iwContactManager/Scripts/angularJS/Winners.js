@@ -20,9 +20,23 @@
 
     // winners external service
     app.service('winnerService', function ($http) {
-        this.get = function () {
-            return $http.get("/api/Values/");
+        // private methods
+        var get = function () {
+            
+            return $http.get("/api/Values/")
+                        .then(
+                            function (response) {
+                                // this function still returns a promise that wraps response.data
+                                return response.data;
+                            });
+
         }
+
+        // define public methods
+        return {
+            get : get
+        };
+
     });
 
     app.controller('WinnersController', ['$http', '$scope', '$interval', '$log', 'winnerService', function ($http, $scope, $interval, $log, winnerService) {
@@ -31,11 +45,10 @@
         $scope.winners = [];
         $scope.currentNotice = 0;
 
-        var promiseGet = winnerService.get(); //The Method Call from service
-
-        promiseGet.then(
-            function (pl) {
-                $scope.winners = pl.data;
+        // grabs data from external service
+        winnerService.get().then(
+            function (data) {
+                $scope.winners = data;
             },
             function (errorPl) {
                 $log.error('failure loading Winners', errorPl);
